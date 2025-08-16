@@ -27,3 +27,4 @@ Thumbs.db
 *.log
 *.meta.orig
 *.bak
+Packages/com.singularitygroup.hotreload/
