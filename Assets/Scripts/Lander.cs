@@ -8,6 +8,10 @@ public class Lander : MonoBehaviour
     private float speed = 700f; // Speed of the lander
     [SerializeField]
     private float rotationSpeed = 100f; // Speed of rotation
+    [SerializeField]
+    private float softLandingThreshold = 4f; // Soft landing threshold
+    [SerializeField]
+    private float verticalLandingThreshold = 0.9f; // Threshold for vertical landing
 
     private Rigidbody2D rb;
     private bool moveUp = false;
@@ -46,5 +50,27 @@ public class Lander : MonoBehaviour
         moveLeft = Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed;
         moveRight = Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed;
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision2D)
+    {
+        // Debug.Log("On Collision Enter: " + collision2D.gameObject.name);
+        // Debug.Log("Relative Velocity: " + collision2D.relativeVelocity + " magnitude " + collision2D.relativeVelocity.magnitude);
+        if (collision2D.relativeVelocity.magnitude > softLandingThreshold)
+        {
+            Debug.Log("Hard landing detected!");
+            return;
+        }
+
+
+        float landingDotVector = Vector2.Dot(collision2D.relativeVelocity.normalized, Vector2.up);
+        // Debug.Log("Dot Vector: " + landingDotVector);
+        if (landingDotVector < verticalLandingThreshold)
+        {
+            Debug.Log("Lander is not vertical enough!");
+            return;
+        }
+
+        Debug.Log("Landing successful!");
     }
 }

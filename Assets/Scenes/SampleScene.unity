@@ -307,7 +307,7 @@ Transform:
   m_GameObject: {fileID: 258506144}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3694, y: 0.3324, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -395,7 +395,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 3.8140845, y: 2.4930944, z: 0}
+    - position: {x: 3.8140845, y: 1.6555524, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -462,7 +462,7 @@ MonoBehaviour:
   - {x: -10.0991955, y: 7.2332134}
   - {x: -7.3120084, y: 6.351985}
   - {x: -2.4288006, y: 1.3508372}
-  - {x: 3.8140845, y: 2.4930944}
+  - {x: 3.8140845, y: 1.6555524}
   - {x: 6.429117, y: 8.792491}
   - {x: 11.184911, y: 11.209364}
   - {x: 19.677364, y: 2.4448838}
@@ -479,7 +479,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -511,9 +511,9 @@ SpriteShapeRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1220271487
-  m_SortingLayer: -1
-  m_SortingOrder: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e4b70b87e6abe2e43b4ad40f32408558, type: 3}
@@ -539,7 +539,7 @@ Transform:
   m_GameObject: {fileID: 404160716}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.97, z: 0}
+  m_LocalPosition: {x: 0, y: -7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -597,7 +597,7 @@ PolygonCollider2D:
       - {x: -10.0991955, y: 7.2332134}
       - {x: -7.3120084, y: 6.351985}
       - {x: -2.4288006, y: 1.3508372}
-      - {x: 3.8140845, y: 2.4930944}
+      - {x: 3.8140845, y: 1.6555524}
       - {x: 6.429117, y: 8.792491}
       - {x: 11.184911, y: 11.209364}
       - {x: 19.677364, y: 2.4448838}
@@ -1104,7 +1104,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f020e42a7e458ff48b20a77150a88ee0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
