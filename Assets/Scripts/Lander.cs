@@ -54,9 +54,17 @@ public class Lander : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision2D)
     {
-        // Debug.Log("On Collision Enter: " + collision2D.gameObject.name);
-        // Debug.Log("Relative Velocity: " + collision2D.relativeVelocity + " magnitude " + collision2D.relativeVelocity.magnitude);
-        if (collision2D.relativeVelocity.magnitude > softLandingThreshold)
+        if (!collision2D.gameObject.TryGetComponent<LandingPad>(out LandingPad landingPad))
+        {
+            Debug.Log("Crash on: " + collision2D.gameObject.name);
+            return;
+        }
+
+        // Debug.Log("Landing on: " + landingPad.gameObject.name);
+
+        float landingSpeed = collision2D.relativeVelocity.magnitude;
+        // Debug.Log("Relative Velocity: " + collision2D.relativeVelocity + " magnitude " + landingSpeed);
+        if (landingSpeed > softLandingThreshold)
         {
             Debug.Log("Hard landing detected!");
             return;
@@ -72,5 +80,20 @@ public class Lander : MonoBehaviour
         }
 
         Debug.Log("Landing successful!");
+
+        float maxAngleScore = 100f;
+        // Map dot from [verticalLandingThreshold .. 1] -> [0 .. 1]
+        float angleNormalized = Mathf.InverseLerp(verticalLandingThreshold, 1f, landingDotVector);
+        float angleScore = angleNormalized * maxAngleScore;
+        // Debug.Log("angleScore: " + angleScore);
+
+        float maxSoftLandingScore = 100f;
+        float speedNormalized = Mathf.InverseLerp(0f, softLandingThreshold, landingSpeed);
+        float softLandingScore = (1.0f - speedNormalized) * maxSoftLandingScore;
+        // Debug.Log("softLandingScore: " + softLandingScore);
+
+        float scoreMultiply = 10f;
+        float totalScore = Mathf.Floor(angleScore + softLandingScore) * scoreMultiply;
+        Debug.Log("Total Score: " + totalScore);
     }
 }
