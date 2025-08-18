@@ -92,8 +92,7 @@ public class Lander : MonoBehaviour
         float softLandingScore = (1.0f - speedNormalized) * maxSoftLandingScore;
         // Debug.Log("softLandingScore: " + softLandingScore);
 
-        float scoreMultiply = 10f;
-        float totalScore = Mathf.Floor(angleScore + softLandingScore) * scoreMultiply;
+        int totalScore = Mathf.FloorToInt(angleScore + softLandingScore) * landingPad.ScoreMultiplier;
         Debug.Log("Total Score: " + totalScore);
     }
 }
