@@ -1,0 +1,13 @@
+# This file is the top-most EditorConfig file
+root = true
+
+# C# files
+[*.cs]
+# Blank line settings
+# Set the number of blank lines to have between methods
+csharp_blank_lines_between_methods = 1
+
+# You can also control blank lines in other places, for example:
+csharp_blank_lines_between_properties = 1
+csharp_blank_lines_between_fields = 0
+csharp_blank_lines_after_usings = 1
