@@ -14,6 +14,11 @@ public class Lander : MonoBehaviour
     [SerializeField]
     private float verticalLandingThreshold = 0.9f; // Threshold for vertical landing
 
+    [SerializeField]
+    private float fuelAmount = 10f; // Amount of fuel available
+    [SerializeField]
+    private float fuelConsumptionAmount = 1f; // Fuel consumption when moving
+
     #region Events
 
     public event EventHandler OnUpForce;
@@ -36,6 +41,16 @@ public class Lander : MonoBehaviour
     private void FixedUpdate()
     {
         OnBeforeForce?.Invoke(this, EventArgs.Empty);
+        if (fuelAmount <= 0)
+        {
+            // Debug.Log("Out of fuel!");
+            return;
+        }
+
+        if (moveUp || moveLeft || moveRight)
+        {
+            ConsumeFuel();
+        }
 
         if (moveUp)
         {
@@ -56,6 +71,15 @@ public class Lander : MonoBehaviour
             // Debug.Log("Moving Right");
             rb.AddTorque(-rotationSpeed * Time.deltaTime);
             OnRightForce?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    private void ConsumeFuel()
+    {
+        if (fuelAmount > 0)
+        {
+            fuelAmount -= fuelConsumptionAmount * Time.deltaTime;
+            fuelAmount = Mathf.Max(fuelAmount, 0);
         }
     }
 
@@ -109,5 +133,13 @@ public class Lander : MonoBehaviour
 
         int totalScore = Mathf.FloorToInt(angleScore + softLandingScore) * landingPad.ScoreMultiplier;
         Debug.Log("Total Score: " + totalScore);
+    }
+
+    internal void AddFuel(float fuelAmount)
+    {
+        this.fuelAmount += fuelAmount;
+        Debug.Log("Added fuel: " + fuelAmount + ", new total: " + this.fuelAmount);
+        // Optionally, you can clamp the fuel amount to a maximum value
+        // this.fuelAmount = Mathf.Min(this.fuelAmount, maxFuelAmount);
     }
 }
