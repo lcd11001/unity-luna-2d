@@ -19,6 +19,9 @@ public class Lander : MonoBehaviour
     [SerializeField]
     private float fuelConsumptionAmount = 1f; // Fuel consumption when moving
 
+    [SerializeField]
+    private LandedEventChannelSO landedEventChannel;
+
     #region Events
 
     public event EventHandler OnUpForce;
@@ -134,7 +137,10 @@ public class Lander : MonoBehaviour
         int totalScore = Mathf.FloorToInt(angleScore + softLandingScore) * landingPad.ScoreMultiplier;
         Debug.Log("Total Score: " + totalScore);
 
-        // GameManager.OnLandedSuccessful?.Invoke(totalScore);
+        if (landedEventChannel != null)
+        {
+            landedEventChannel.RaiseEvent(totalScore);
+        }
     }
 
     public void HandleFuelPickedUp(float fuelAmount)
