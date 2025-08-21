@@ -133,9 +133,11 @@ public class Lander : MonoBehaviour
 
         int totalScore = Mathf.FloorToInt(angleScore + softLandingScore) * landingPad.ScoreMultiplier;
         Debug.Log("Total Score: " + totalScore);
+
+        // GameManager.OnLandedSuccessful?.Invoke(totalScore);
     }
 
-    internal void AddFuel(float fuelAmount)
+    public void HandleFuelPickedUp(float fuelAmount)
     {
         this.fuelAmount += fuelAmount;
         Debug.Log("Added fuel: " + fuelAmount + ", new total: " + this.fuelAmount);
