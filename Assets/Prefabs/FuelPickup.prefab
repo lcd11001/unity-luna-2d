@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuelAmount: 5
+  fuelEvent: {fileID: 11400000, guid: 41435ab026a9540448d82396ec21f10c, type: 2}
 --- !u!1 &3105593656453882903
 GameObject:
   m_ObjectHideFlags: 0
