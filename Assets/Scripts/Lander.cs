@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,15 @@ public class Lander : MonoBehaviour
     [SerializeField]
     private float verticalLandingThreshold = 0.9f; // Threshold for vertical landing
 
+    #region Events
+
+    public event EventHandler OnUpForce;
+    public event EventHandler OnLeftForce;
+    public event EventHandler OnRightForce;
+    public event EventHandler OnBeforeForce;
+
+    #endregion
+
     private Rigidbody2D rb;
     private bool moveUp = false;
     private bool moveLeft = false;
@@ -25,22 +35,27 @@ public class Lander : MonoBehaviour
 
     private void FixedUpdate()
     {
+        OnBeforeForce?.Invoke(this, EventArgs.Empty);
+
         if (moveUp)
         {
             // Debug.Log("Moving Up");
             rb.AddForce(transform.up * speed * Time.deltaTime, ForceMode2D.Force);
+            OnUpForce?.Invoke(this, EventArgs.Empty);
         }
 
         if (moveLeft)
         {
             // Debug.Log("Moving Left");
             rb.AddTorque(rotationSpeed * Time.deltaTime);
+            OnLeftForce?.Invoke(this, EventArgs.Empty);
         }
 
         if (moveRight)
         {
             // Debug.Log("Moving Right");
             rb.AddTorque(-rotationSpeed * Time.deltaTime);
+            OnRightForce?.Invoke(this, EventArgs.Empty);
         }
     }
 
