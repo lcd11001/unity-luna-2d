@@ -6,6 +6,22 @@ public class StatsUI : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text valueText;
+    [SerializeField]
+    private GameObject arrowUp;
+    [SerializeField]
+    private GameObject arrowDown;
+    [SerializeField]
+    private GameObject arrowLeft;
+    [SerializeField]
+    private GameObject arrowRight;
+
+    private void Awake()
+    {
+        arrowUp.SetActive(false);
+        arrowDown.SetActive(false);
+        arrowLeft.SetActive(false);
+        arrowRight.SetActive(false);
+    }
 
     private void UpdateValue()
     {
@@ -16,9 +32,19 @@ public class StatsUI : MonoBehaviour
         + Lander.Instance.GetFuelAmount().ToString("F2");
     }
 
+    private void UpdateArrow()
+    {
+        float epsilon = 0.1f;
+
+        arrowUp.SetActive(Lander.Instance.GetSpeedY() > epsilon);
+        arrowDown.SetActive(Lander.Instance.GetSpeedY() < -epsilon);
+        arrowLeft.SetActive(Lander.Instance.GetSpeedX() < -epsilon);
+        arrowRight.SetActive(Lander.Instance.GetSpeedX() > epsilon);
+    }
+
     private float ConvertSpeed(float speed)
     {
-        return Mathf.Round(speed * 10f);
+        return Mathf.Abs(Mathf.Round(speed * 10f));
     }
 
     private string ConvertTime(float seconds)
@@ -31,5 +57,6 @@ public class StatsUI : MonoBehaviour
     private void Update()
     {
         UpdateValue();
+        UpdateArrow();
     }
 }
