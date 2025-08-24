@@ -1,10 +1,12 @@
-using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [field: SerializeField]
     public int Score { get; private set; }
+
+    [field: SerializeField]
+    public float Time { get; private set; }
 
     public static GameManager Instance { get; private set; }
 
@@ -19,6 +21,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        Time += UnityEngine.Time.deltaTime;
     }
 
     public void HandleLandedSuccessful(int score)

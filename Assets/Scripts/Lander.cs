@@ -36,9 +36,21 @@ public class Lander : MonoBehaviour
     private bool moveLeft = false;
     private bool moveRight = false;
 
+    private bool hasInput = false;
+
+    public static Lander Instance { get; private set; }
+
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        if (Instance == null)
+        {
+            Instance = this;
+            rb = GetComponent<Rigidbody2D>();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void FixedUpdate()
@@ -52,6 +64,7 @@ public class Lander : MonoBehaviour
 
         if (moveUp || moveLeft || moveRight)
         {
+            hasInput = true;
             ConsumeFuel();
         }
 
@@ -96,6 +109,12 @@ public class Lander : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision2D)
     {
+        if (!hasInput)
+        {
+            // Debug.Log("No input detected, ignoring collision.");
+            return;
+        }
+
         if (!collision2D.gameObject.TryGetComponent<LandingPad>(out LandingPad landingPad))
         {
             Debug.Log("Crash on: " + collision2D.gameObject.name);
@@ -149,5 +168,20 @@ public class Lander : MonoBehaviour
         Debug.Log("Added fuel: " + fuelAmount + ", new total: " + this.fuelAmount);
         // Optionally, you can clamp the fuel amount to a maximum value
         // this.fuelAmount = Mathf.Min(this.fuelAmount, maxFuelAmount);
+    }
+
+    public float GetFuelAmount()
+    {
+        return fuelAmount;
+    }
+
+    public float GetSpeedX()
+    {
+        return rb.linearVelocity.x;
+    }
+
+    public float GetSpeedY()
+    {
+        return rb.linearVelocity.y;
     }
 }

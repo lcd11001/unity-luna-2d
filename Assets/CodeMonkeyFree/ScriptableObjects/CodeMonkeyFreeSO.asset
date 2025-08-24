@@ -14,40 +14,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1755742395
+  lastShownTimestamp: 1756000726
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1755742396
+  checkedLastUpdateTimestamp: 1756000726
   lastQOTDResponse:
-    questionId: 213
-    questionText: What is the purpose of a namespace?
-    answerA: To confuse you
-    answerB: Better performance
-    answerC: Keep your code organized
+    questionId: 214
+    questionText: 'What is the position of the transform after running this code?
+
+      <p>Vector3
+      targetPosition = new Vector3(10, 0, 0);</p>
+
+      <p>transform.position =
+      targetPosition;</p>
+
+      <p>targetPosition.x = 20;</p>'
+    answerA: (10, 0, 0)
+    answerB: (20, 0, 0)
+    answerC: Unknown
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1755742396
+  lastQotdTimestamp: 1756000726
   lastDynamicHeaderResponse:
-    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle_EndsSoon.png
-    topText: All my Courses (and Games) in one Bundle! DEEP DISCOUNT ONLY THIS SUMMER!
+    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle_EndsTomorrow.png
+    topText: All my Courses (and Games) in one Bundle! DEEP DISCOUNT ENDS TOMORROW!
     topLink: summer2025bundle
     bottomText: Get my Code Monkey Toolkit and make games BETTER and FASTER! 50%
       OFF right now!
     bottomLink: toolkit
-  lastDynamicHeaderTimestamp: 1755742396
+  lastDynamicHeaderTimestamp: 1756000726
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1755742396
+  websiteLatestMessageTimestamp: 1756000726
   websiteLatestVideos:
     videos:
+    - youTubeId: YCvh88Hg5m8
+      title: TOP 8 QUICK Tips on Game Programming!
+    - youTubeId: Lgmv7PYKka8
+      title: Does this AI FINALLY replace Game Devs? Should YOU worry?
     - youTubeId: x4BTbeKinSI
       title: TOP 10 FREE NEW Assets AUGUST 2025!
     - youTubeId: HZ48JOAf-Ko
       title: Did I STOP making TUTORIALS?
-    - youTubeId: XJsidUVPOCY
-      title: TOP 10 NEW Games, Made with Unity! (JULY 2025)
-    - youTubeId: CZ5rsOwgcl4
-      title: Unity 6.2 is HERE!
-  websiteLatestVideosTimestamp: 1755742396
+  websiteLatestVideosTimestamp: 1756000726
