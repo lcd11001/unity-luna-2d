@@ -19,7 +19,7 @@ public class StatsUI : MonoBehaviour
     private Image fuelBar;
 
     // Tween colors from 0 to 100%
-    private Color[] fuelBarColors = new Color[]
+    private readonly Color[] fuelBarColors = new Color[]
     {
         Color.red,
         Color.yellow,
