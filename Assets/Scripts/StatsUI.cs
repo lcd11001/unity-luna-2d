@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class StatsUI : MonoBehaviour
 {
@@ -14,6 +15,16 @@ public class StatsUI : MonoBehaviour
     private GameObject arrowLeft;
     [SerializeField]
     private GameObject arrowRight;
+    [SerializeField]
+    private Image fuelBar;
+
+    // Tween colors from 0 to 100%
+    private Color[] fuelBarColors = new Color[]
+    {
+        Color.red,
+        Color.yellow,
+        Color.green
+    };
 
     private void Awake()
     {
@@ -28,8 +39,7 @@ public class StatsUI : MonoBehaviour
         valueText.text = GameManager.Instance.Score + "\n"
         + ConvertTime(GameManager.Instance.Time) + "\n"
         + ConvertSpeed(Lander.Instance.GetSpeedX()) + "\n"
-        + ConvertSpeed(Lander.Instance.GetSpeedY()) + "\n"
-        + Lander.Instance.GetFuelAmount().ToString("F2");
+        + ConvertSpeed(Lander.Instance.GetSpeedY());
     }
 
     private void UpdateArrow()
@@ -40,6 +50,38 @@ public class StatsUI : MonoBehaviour
         arrowDown.SetActive(Lander.Instance.GetSpeedY() < -epsilon);
         arrowLeft.SetActive(Lander.Instance.GetSpeedX() < -epsilon);
         arrowRight.SetActive(Lander.Instance.GetSpeedX() > epsilon);
+    }
+
+    private void UpdateFuelBar()
+    {
+        if (fuelBar != null)
+        {
+            float fuelAmount = Lander.Instance.GetFuelAmountNormalized();
+            fuelBar.fillAmount = fuelAmount;
+
+            if (fuelBarColors == null || fuelBarColors.Length == 0)
+            {
+                return; // No colors to use
+            }
+
+            if (fuelBarColors.Length == 1)
+            {
+                fuelBar.color = fuelBarColors[0];
+                return;
+            }
+
+            // Calculate the position in the color array
+            float colorPosition = fuelAmount * (fuelBarColors.Length - 1);
+
+            // Determine the two colors to lerp between
+            int index1 = Mathf.Clamp(Mathf.FloorToInt(colorPosition), 0, fuelBarColors.Length - 2);
+            int index2 = index1 + 1;
+
+            // Determine the lerp factor
+            float lerpFactor = colorPosition - index1;
+
+            fuelBar.color = Color.Lerp(fuelBarColors[index1], fuelBarColors[index2], lerpFactor);
+        }
     }
 
     private float ConvertSpeed(float speed)
@@ -58,5 +100,6 @@ public class StatsUI : MonoBehaviour
     {
         UpdateValue();
         UpdateArrow();
+        UpdateFuelBar();
     }
 }

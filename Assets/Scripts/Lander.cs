@@ -15,7 +15,9 @@ public class Lander : MonoBehaviour
     private float verticalLandingThreshold = 0.9f; // Threshold for vertical landing
 
     [SerializeField]
-    private float fuelAmount = 10f; // Amount of fuel available
+    private float fuelAmountMax = 10f; // Amount of fuel available
+    [SerializeField]
+    private float fuelAmount = 0f; // Amount of fuel available
     [SerializeField]
     private float fuelConsumptionAmount = 1f; // Fuel consumption when moving
 
@@ -46,6 +48,7 @@ public class Lander : MonoBehaviour
         {
             Instance = this;
             rb = GetComponent<Rigidbody2D>();
+            fuelAmount = fuelAmountMax;
         }
         else
         {
@@ -165,14 +168,23 @@ public class Lander : MonoBehaviour
     public void HandleFuelPickedUp(float fuelAmount)
     {
         this.fuelAmount += fuelAmount;
+        this.fuelAmount = Mathf.Min(this.fuelAmount, fuelAmountMax);
         Debug.Log("Added fuel: " + fuelAmount + ", new total: " + this.fuelAmount);
-        // Optionally, you can clamp the fuel amount to a maximum value
-        // this.fuelAmount = Mathf.Min(this.fuelAmount, maxFuelAmount);
     }
 
     public float GetFuelAmount()
     {
         return fuelAmount;
+    }
+
+    public float GetFuelAmountMax()
+    {
+        return fuelAmountMax;
+    }
+
+    public float GetFuelAmountNormalized()
+    {
+        return fuelAmount / fuelAmountMax;
     }
 
     public float GetSpeedX()
