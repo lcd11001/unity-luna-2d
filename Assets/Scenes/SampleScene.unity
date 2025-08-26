@@ -1046,6 +1046,7 @@ Transform:
   - {fileID: 1770755864}
   - {fileID: 1685809941}
   - {fileID: 1948645456}
+  - {fileID: 539862561}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &491231133
@@ -1127,9 +1128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a1cabf1c620c7941b87811216d8264f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  landerSprite: {fileID: 1912258802}
   leftThrusterParticles: {fileID: 1770755866}
   midThrusterParticles: {fileID: 1685809943}
   rightThrusterParticles: {fileID: 1948645458}
+  explosionParticles: {fileID: 1888295988}
 --- !u!114 &491231136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1385,6 +1388,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!4 &539862561 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6013482828501684060, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+  m_PrefabInstance: {fileID: 1113966322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,6 +2043,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bbb373f9794379459a3b7c95ece3fe3, type: 3}
+--- !u!1001 &1113966322
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 491231132}
+    m_Modifications:
+    - target: {fileID: 570857052369263401, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+      propertyPath: m_Name
+      value: ExplosionParticleSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013482828501684060, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013482828501684060, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013482828501684060, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013482828501684060, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013482828501684060, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013482828501684060, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013482828501684060, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013482828501684060, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013482828501684060, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013482828501684060, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
 --- !u!1 &1159191826
 GameObject:
   m_ObjectHideFlags: 0
@@ -3275,6 +3340,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1842005664}
   m_CullTransparentMesh: 1
+--- !u!198 &1888295988 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7920034374121356911, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
+  m_PrefabInstance: {fileID: 1113966322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1912258800
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,6 +34,7 @@ public class Lander : MonoBehaviour
     public event EventHandler OnLeftForce;
     public event EventHandler OnRightForce;
     public event EventHandler OnBeforeForce;
+    public event EventHandler OnExplosion;
 
     #endregion
 
@@ -175,6 +176,7 @@ public class Lander : MonoBehaviour
                     landingSpeed = landingSpeed
                 });
             }
+            OnExplosion?.Invoke(this, EventArgs.Empty);
             return;
         }
 
@@ -197,6 +199,7 @@ public class Lander : MonoBehaviour
                     landingSpeed = landingSpeed
                 });
             }
+            OnExplosion?.Invoke(this, EventArgs.Empty);
             return;
         }
 
@@ -236,6 +239,7 @@ public class Lander : MonoBehaviour
                     landingSpeed = landingSpeed
                 });
             }
+            OnExplosion?.Invoke(this, EventArgs.Empty);
             return;
         }
 

@@ -7,6 +7,9 @@ using UnityEngine.XR;
 public class LanderVisuals : MonoBehaviour
 {
     [SerializeField]
+    private SpriteRenderer landerSprite;
+
+    [SerializeField]
     private ParticleSystem leftThrusterParticles;
 
     [SerializeField]
@@ -14,6 +17,9 @@ public class LanderVisuals : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem rightThrusterParticles;
+
+    [SerializeField]
+    private ParticleSystem explosionParticles;
 
     private Lander lander;
     private void Awake()
@@ -26,6 +32,7 @@ public class LanderVisuals : MonoBehaviour
             lander.OnLeftForce += HandleLeftForce;
             lander.OnRightForce += HandleRightForce;
             lander.OnBeforeForce += HandleBeforeForce;
+            lander.OnExplosion += HandleExplosion;
         }
     }
 
@@ -37,6 +44,7 @@ public class LanderVisuals : MonoBehaviour
             lander.OnLeftForce -= HandleLeftForce;
             lander.OnRightForce -= HandleRightForce;
             lander.OnBeforeForce -= HandleBeforeForce;
+            lander.OnExplosion -= HandleExplosion;
         }
     }
 
@@ -51,6 +59,14 @@ public class LanderVisuals : MonoBehaviour
     {
         ParticleSystem.EmissionModule emissionModule = particleSystem.emission;
         emissionModule.enabled = isEnabled;
+    }
+
+    private void PlayParticle(ParticleSystem particleSystem)
+    {
+        if (particleSystem != null)
+        {
+            particleSystem.Play();
+        }
     }
 
     private void HandleRightForce(object sender, EventArgs e)
@@ -75,5 +91,11 @@ public class LanderVisuals : MonoBehaviour
         SetEnableParticle(midThrusterParticles, false);
         SetEnableParticle(leftThrusterParticles, false);
         SetEnableParticle(rightThrusterParticles, false);
+    }
+
+    private void HandleExplosion(object sender, EventArgs e)
+    {
+        landerSprite.enabled = false;
+        PlayParticle(explosionParticles);
     }
 }
