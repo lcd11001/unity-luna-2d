@@ -121,6 +121,17 @@ public class Lander : MonoBehaviour
         if (!collision2D.gameObject.TryGetComponent<LandingPad>(out LandingPad landingPad))
         {
             Debug.Log("Crash on: " + collision2D.gameObject.name);
+            if (landedEventChannel != null)
+            {
+                landedEventChannel.RaiseEvent(new OnLandingEvent
+                {
+                    type = LandingType.WrongLandingArea,
+                    scoreMultiplier = 0,
+                    score = 0,
+                    landingDotVector = 0,
+                    landingSpeed = 0
+                });
+            }
             return;
         }
 
@@ -131,6 +142,17 @@ public class Lander : MonoBehaviour
         if (landingSpeed > softLandingThreshold)
         {
             Debug.Log("Hard landing detected!");
+            if (landedEventChannel != null)
+            {
+                landedEventChannel.RaiseEvent(new OnLandingEvent
+                {
+                    type = LandingType.TooFastLanding,
+                    scoreMultiplier = landingPad.ScoreMultiplier,
+                    score = 0,
+                    landingDotVector = 0,
+                    landingSpeed = landingSpeed
+                });
+            }
             return;
         }
 
@@ -140,6 +162,17 @@ public class Lander : MonoBehaviour
         if (landingDotVector < verticalLandingThreshold)
         {
             Debug.Log("Lander is not vertical enough!");
+            if (landedEventChannel != null)
+            {
+                landedEventChannel.RaiseEvent(new OnLandingEvent
+                {
+                    type = LandingType.TooSteepAngle,
+                    scoreMultiplier = landingPad.ScoreMultiplier,
+                    score = 0,
+                    landingDotVector = landingDotVector,
+                    landingSpeed = landingSpeed
+                });
+            }
             return;
         }
 
@@ -161,7 +194,14 @@ public class Lander : MonoBehaviour
 
         if (landedEventChannel != null)
         {
-            landedEventChannel.RaiseEvent(totalScore);
+            landedEventChannel.RaiseEvent(new OnLandingEvent
+            {
+                type = LandingType.Success,
+                scoreMultiplier = landingPad.ScoreMultiplier,
+                score = totalScore,
+                landingDotVector = landingDotVector,
+                landingSpeed = landingSpeed
+            });
         }
     }
 

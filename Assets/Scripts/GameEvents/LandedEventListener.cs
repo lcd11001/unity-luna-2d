@@ -1,4 +1,4 @@
-public class LandedEventListener : GameEventListener<int>
+public class LandedEventListener : GameEventListener<OnLandingEvent>
 {
 
 }
