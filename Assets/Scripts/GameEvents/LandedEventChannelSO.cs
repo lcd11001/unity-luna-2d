@@ -10,13 +10,19 @@ public enum LandingType
     TooFastLanding
 }
 
-public class OnLandingEvent : UnityEvent
+[Serializable]
+public class OnLandingEvent
 {
     public LandingType type;
     public float scoreMultiplier;
     public int score;
     public float landingDotVector;
     public float landingSpeed;
+
+    public override string ToString()
+    {
+        return $"Type: {type}, Score: {score}, Multiplier: {scoreMultiplier}, DotVector: {landingDotVector}, Speed: {landingSpeed}";
+    }
 }
 
 [CreateAssetMenu(fileName = "LandedEventChannel", menuName = "ScriptableObjects/GameEventChannel/Landed")]
