@@ -1109,11 +1109,12 @@ MonoBehaviour:
   speed: 700
   rotationSpeed: 100
   softLandingThreshold: 4
-  verticalLandingThreshold: 0.9
+  verticalLandingAngleThreshold: 15
   fuelAmountMax: 10
   fuelAmount: 10
   fuelConsumptionAmount: 1
   landedEventChannel: {fileID: 11400000, guid: 0d3cd6581cd5d25488596fe013c0c940, type: 2}
+  stateEventChannel: {fileID: 11400000, guid: ba3aca399e14a414885001eaa1b2bb53, type: 2}
 --- !u!114 &491231135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3383,6 +3384,7 @@ GameObject:
   - component: {fileID: 1959964849}
   - component: {fileID: 1959964848}
   - component: {fileID: 1959964851}
+  - component: {fileID: 1959964852}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3466,6 +3468,34 @@ MonoBehaviour:
       - m_Target: {fileID: 1959964849}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: HandleLandedSuccessful
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1959964852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959964847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d97fef28331d02948b27d80a04b6b1f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: ba3aca399e14a414885001eaa1b2bb53, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1959964849}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: HandleLanderStateChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

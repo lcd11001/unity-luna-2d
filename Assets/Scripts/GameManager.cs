@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    private bool isGameActive = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -25,7 +27,15 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Time += UnityEngine.Time.deltaTime;
+        // Should use event instead, to avoid direct reference
+        // if (Lander.Instance == null || Lander.Instance.GetState() != Lander.State.Flying)
+        // {
+        //     return;
+        // }
+        if (isGameActive)
+        {
+            Time += UnityEngine.Time.deltaTime;
+        }
     }
 
     public void HandleLandedSuccessful(int score)
@@ -36,6 +46,11 @@ public class GameManager : MonoBehaviour
     public void HandleCoinPickedUp(int amount)
     {
         AddScore(amount);
+    }
+
+    public void HandleLanderStateChanged(Lander.State state)
+    {
+        isGameActive = state == Lander.State.Flying;
     }
 
     private void AddScore(int amount)

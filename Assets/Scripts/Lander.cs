@@ -25,6 +25,9 @@ public class Lander : MonoBehaviour
     [SerializeField]
     private LandedEventChannelSO landedEventChannel;
 
+    [SerializeField]
+    private LanderStateEventChannelSO stateEventChannel;
+
     #region Events
 
     public event EventHandler OnUpForce;
@@ -51,6 +54,12 @@ public class Lander : MonoBehaviour
     }
 
     private State currentState;
+    public State GetState() { return currentState; }
+    private void SetState(State newState)
+    {
+        currentState = newState;
+        stateEventChannel.RaiseEvent(newState);
+    }
 
     private void Awake()
     {
@@ -63,7 +72,7 @@ public class Lander : MonoBehaviour
 
             fuelAmount = fuelAmountMax;
 
-            currentState = State.Waiting;
+            SetState(State.Waiting);
         }
         else
         {
@@ -75,14 +84,14 @@ public class Lander : MonoBehaviour
     {
         OnBeforeForce?.Invoke(this, EventArgs.Empty);
 
-        switch (currentState)
+        switch (GetState())
         {
             case State.Waiting:
                 if (moveUp || moveLeft || moveRight)
                 {
                     rb.gravityScale = GRAVITY_NORMAL;
 
-                    currentState = State.Flying;
+                    SetState(State.Flying);
                 }
                 break;
             case State.Flying:
@@ -142,13 +151,13 @@ public class Lander : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision2D)
     {
-        if (currentState != State.Flying)
+        if (GetState() != State.Flying)
         {
             Debug.Log("current state not flying, ignoring collision.");
             return;
         }
 
-        currentState = State.Landing;
+        SetState(State.Landing);
         float landingSpeed = collision2D.relativeVelocity.magnitude;
         float landingAngle = Vector2.Angle(transform.up, Vector2.up);
 
