@@ -31,7 +31,7 @@ public class LandingUI : MonoBehaviour
         }
 
         statusText.text = $"{ConvertSpeed(landingEvent.landingSpeed)}\n" +
-                          $"{ConvertDotVector(landingEvent.landingDotVector)}\n" +
+                          $"{ConvertAngle(landingEvent.landingAngle)}\n" +
                           $"x{landingEvent.scoreMultiplier}\n" +
                           $"{landingEvent.score}";
     }
@@ -41,9 +41,10 @@ public class LandingUI : MonoBehaviour
         return Mathf.Abs(Mathf.Round(speed * 10f));
     }
 
-    private float ConvertDotVector(float dotVectorMagnitude)
+    private float ConvertAngle(float angle)
     {
-        return Mathf.Abs(Mathf.Round(dotVectorMagnitude * 100f));
+        // return Mathf.Abs(Mathf.Round(angle * 100f));
+        return Mathf.Round(angle);
     }
 
 }

@@ -16,12 +16,12 @@ public class OnLandingEvent
     public LandingType type;
     public float scoreMultiplier;
     public int score;
-    public float landingDotVector;
+    public float landingAngle;
     public float landingSpeed;
 
     public override string ToString()
     {
-        return $"Type: {type}, Score: {score}, Multiplier: {scoreMultiplier}, DotVector: {landingDotVector}, Speed: {landingSpeed}";
+        return $"Type: {type}, Score: {score}, Multiplier: {scoreMultiplier}, Angle: {landingAngle}, Speed: {landingSpeed}";
     }
 }
 

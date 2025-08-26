@@ -12,7 +12,8 @@ public class Lander : MonoBehaviour
     [SerializeField]
     private float softLandingThreshold = 4f; // Soft landing threshold
     [SerializeField]
-    private float verticalLandingThreshold = 0.9f; // Threshold for vertical landing
+    // private float verticalLandingThreshold = 0.9f; // Threshold for vertical landing
+    private float verticalLandingAngleThreshold = 15f; // Threshold for vertical landing angle
 
     [SerializeField]
     private float fuelAmountMax = 10f; // Amount of fuel available
@@ -147,6 +148,10 @@ public class Lander : MonoBehaviour
             return;
         }
 
+        currentState = State.Landing;
+        float landingSpeed = collision2D.relativeVelocity.magnitude;
+        float landingAngle = Vector2.Angle(transform.up, Vector2.up);
+
         if (!collision2D.gameObject.TryGetComponent<LandingPad>(out LandingPad landingPad))
         {
             Debug.Log("Crash on: " + collision2D.gameObject.name);
@@ -157,17 +162,17 @@ public class Lander : MonoBehaviour
                     type = LandingType.WrongLandingArea,
                     scoreMultiplier = 0,
                     score = 0,
-                    landingDotVector = 0,
-                    landingSpeed = 0
+                    landingAngle = landingAngle,
+                    landingSpeed = landingSpeed
                 });
             }
             return;
         }
 
         // Debug.Log("Landing on: " + landingPad.gameObject.name);
-        currentState = State.Landing;
 
-        float landingSpeed = collision2D.relativeVelocity.magnitude;
+
+
         // Debug.Log("Relative Velocity: " + collision2D.relativeVelocity + " magnitude " + landingSpeed);
         if (landingSpeed > softLandingThreshold)
         {
@@ -179,14 +184,14 @@ public class Lander : MonoBehaviour
                     type = LandingType.TooFastLanding,
                     scoreMultiplier = landingPad.ScoreMultiplier,
                     score = 0,
-                    landingDotVector = 0,
+                    landingAngle = landingAngle,
                     landingSpeed = landingSpeed
                 });
             }
             return;
         }
 
-
+        /*
         float landingDotVector = Vector2.Dot(collision2D.relativeVelocity.normalized, Vector2.up);
         // Debug.Log("Dot Vector: " + landingDotVector);
         if (landingDotVector < verticalLandingThreshold)
@@ -199,7 +204,26 @@ public class Lander : MonoBehaviour
                     type = LandingType.TooSteepAngle,
                     scoreMultiplier = landingPad.ScoreMultiplier,
                     score = 0,
-                    landingDotVector = landingDotVector,
+                    landingAngle = landingDotVector,
+                    landingSpeed = landingSpeed
+                });
+            }
+            return;
+        }
+        */
+
+        Debug.Log("Landing angle: " + landingAngle);
+        if (landingAngle > verticalLandingAngleThreshold)
+        {
+            Debug.Log("Lander is not vertical enough!");
+            if (landedEventChannel != null)
+            {
+                landedEventChannel.RaiseEvent(new OnLandingEvent
+                {
+                    type = LandingType.TooSteepAngle,
+                    scoreMultiplier = landingPad.ScoreMultiplier,
+                    score = 0,
+                    landingAngle = landingAngle,
                     landingSpeed = landingSpeed
                 });
             }
@@ -210,9 +234,10 @@ public class Lander : MonoBehaviour
 
         float maxAngleScore = 100f;
         // Map dot from [verticalLandingThreshold .. 1] -> [0 .. 1]
-        float angleNormalized = Mathf.InverseLerp(verticalLandingThreshold, 1f, landingDotVector);
+        // float angleNormalized = Mathf.InverseLerp(verticalLandingThreshold, 1f, landingDotVector);
+        float angleNormalized = Mathf.InverseLerp(verticalLandingAngleThreshold, 0f, landingAngle);
         float angleScore = angleNormalized * maxAngleScore;
-        // Debug.Log("angleScore: " + angleScore);
+        Debug.Log("angleScore: " + angleScore);
 
         float maxSoftLandingScore = 100f;
         float speedNormalized = Mathf.InverseLerp(0f, softLandingThreshold, landingSpeed);
@@ -229,7 +254,8 @@ public class Lander : MonoBehaviour
                 type = LandingType.Success,
                 scoreMultiplier = landingPad.ScoreMultiplier,
                 score = totalScore,
-                landingDotVector = landingDotVector,
+                // landingAngle = landingDotVector,
+                landingAngle = landingAngle,
                 landingSpeed = landingSpeed
             });
         }
