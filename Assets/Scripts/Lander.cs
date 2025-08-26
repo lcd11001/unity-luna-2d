@@ -176,7 +176,7 @@ public class Lander : MonoBehaviour
                     landingSpeed = landingSpeed
                 });
             }
-            OnExplosion?.Invoke(this, EventArgs.Empty);
+            Explosion();
             return;
         }
 
@@ -199,7 +199,7 @@ public class Lander : MonoBehaviour
                     landingSpeed = landingSpeed
                 });
             }
-            OnExplosion?.Invoke(this, EventArgs.Empty);
+            Explosion();
             return;
         }
 
@@ -220,6 +220,7 @@ public class Lander : MonoBehaviour
                     landingSpeed = landingSpeed
                 });
             }
+            Explosion();
             return;
         }
         */
@@ -239,7 +240,7 @@ public class Lander : MonoBehaviour
                     landingSpeed = landingSpeed
                 });
             }
-            OnExplosion?.Invoke(this, EventArgs.Empty);
+            Explosion();
             return;
         }
 
@@ -304,5 +305,14 @@ public class Lander : MonoBehaviour
     public float GetSpeedY()
     {
         return rb.linearVelocity.y;
+    }
+
+    private void Explosion()
+    {
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+
+        OnExplosion?.Invoke(this, EventArgs.Empty);
     }
 }

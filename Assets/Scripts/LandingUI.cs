@@ -1,5 +1,8 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LandingUI : MonoBehaviour
 {
@@ -10,10 +13,18 @@ public class LandingUI : MonoBehaviour
     private TMP_Text titleText;
     [SerializeField]
     private TMP_Text statusText;
+    [SerializeField]
+    private Button restartButton;
 
     void Awake()
     {
         panel.SetActive(false);
+        restartButton.onClick.AddListener(OnRestartButtonClicked);
+    }
+
+    private void OnRestartButtonClicked()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void OnLandingEvent(OnLandingEvent landingEvent)
