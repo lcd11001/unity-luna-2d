@@ -38,17 +38,31 @@ public class Lander : MonoBehaviour
     private bool moveLeft = false;
     private bool moveRight = false;
 
-    private bool hasInput = false;
-
     public static Lander Instance { get; private set; }
+
+    private const float GRAVITY_NORMAL = 0.7f;
+
+    public enum State
+    {
+        Waiting,
+        Flying,
+        Landing
+    }
+
+    private State currentState;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+
             rb = GetComponent<Rigidbody2D>();
+            rb.gravityScale = 0;
+
             fuelAmount = fuelAmountMax;
+
+            currentState = State.Waiting;
         }
         else
         {
@@ -59,37 +73,52 @@ public class Lander : MonoBehaviour
     private void FixedUpdate()
     {
         OnBeforeForce?.Invoke(this, EventArgs.Empty);
-        if (fuelAmount <= 0)
-        {
-            // Debug.Log("Out of fuel!");
-            return;
-        }
 
-        if (moveUp || moveLeft || moveRight)
+        switch (currentState)
         {
-            hasInput = true;
-            ConsumeFuel();
-        }
+            case State.Waiting:
+                if (moveUp || moveLeft || moveRight)
+                {
+                    rb.gravityScale = GRAVITY_NORMAL;
 
-        if (moveUp)
-        {
-            // Debug.Log("Moving Up");
-            rb.AddForce(transform.up * speed * Time.deltaTime, ForceMode2D.Force);
-            OnUpForce?.Invoke(this, EventArgs.Empty);
-        }
+                    currentState = State.Flying;
+                }
+                break;
+            case State.Flying:
+                if (fuelAmount <= 0)
+                {
+                    // Debug.Log("Out of fuel!");
+                    return;
+                }
 
-        if (moveLeft)
-        {
-            // Debug.Log("Moving Left");
-            rb.AddTorque(rotationSpeed * Time.deltaTime);
-            OnLeftForce?.Invoke(this, EventArgs.Empty);
-        }
+                if (moveUp || moveLeft || moveRight)
+                {
+                    ConsumeFuel();
+                }
 
-        if (moveRight)
-        {
-            // Debug.Log("Moving Right");
-            rb.AddTorque(-rotationSpeed * Time.deltaTime);
-            OnRightForce?.Invoke(this, EventArgs.Empty);
+                if (moveUp)
+                {
+                    // Debug.Log("Moving Up");
+                    rb.AddForce(transform.up * speed * Time.deltaTime, ForceMode2D.Force);
+                    OnUpForce?.Invoke(this, EventArgs.Empty);
+                }
+
+                if (moveLeft)
+                {
+                    // Debug.Log("Moving Left");
+                    rb.AddTorque(rotationSpeed * Time.deltaTime);
+                    OnLeftForce?.Invoke(this, EventArgs.Empty);
+                }
+
+                if (moveRight)
+                {
+                    // Debug.Log("Moving Right");
+                    rb.AddTorque(-rotationSpeed * Time.deltaTime);
+                    OnRightForce?.Invoke(this, EventArgs.Empty);
+                }
+                break;
+            case State.Landing:
+                break;
         }
     }
 
@@ -112,9 +141,9 @@ public class Lander : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision2D)
     {
-        if (!hasInput)
+        if (currentState != State.Flying)
         {
-            // Debug.Log("No input detected, ignoring collision.");
+            Debug.Log("current state not flying, ignoring collision.");
             return;
         }
 
@@ -136,6 +165,7 @@ public class Lander : MonoBehaviour
         }
 
         // Debug.Log("Landing on: " + landingPad.gameObject.name);
+        currentState = State.Landing;
 
         float landingSpeed = collision2D.relativeVelocity.magnitude;
         // Debug.Log("Relative Velocity: " + collision2D.relativeVelocity + " magnitude " + landingSpeed);
