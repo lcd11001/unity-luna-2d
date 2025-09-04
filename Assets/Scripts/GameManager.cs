@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private List<GameLevel> gameLevels;
+
+    [SerializeField]
+    private CinemachineCamera cinemachineCamera;
 
     public static GameManager Instance { get; private set; }
 
@@ -95,6 +99,12 @@ public class GameManager : MonoBehaviour
                     {
                         Lander.Instance.transform.position = newLevel.PlayerSpawnPoint.position;
                     }
+
+                    if (cinemachineCamera != null)
+                    {
+                        cinemachineCamera.Target.TrackingTarget = newLevel.TargetCamera;
+                        cinemachineCamera.Lens.OrthographicSize = newLevel.CameraZoomSize;
+                    }
                     break;
                 }
             }
@@ -113,6 +123,9 @@ public class GameManager : MonoBehaviour
         Score = 0;
         Time = 0f;
         isGameActive = false;
+
+        // the reference to the Cinemachine camera is missing after reload the scene
+        cinemachineCamera = FindFirstObjectByType<CinemachineCamera>();
     }
 
     public void GoToNextLevel()

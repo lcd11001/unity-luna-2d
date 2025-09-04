@@ -283,7 +283,7 @@ Transform:
   m_GameObject: {fileID: 63463255}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.53999954, y: 0.00000023841858, z: -10}
+  m_LocalPosition: {x: 0.53999907, y: 0.00000047683716, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -998,7 +998,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.53999954, y: 0.00000023841858, z: -10}
+  m_LocalPosition: {x: 0.53999907, y: 0.00000047683716, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3076,6 +3076,7 @@ MonoBehaviour:
   gameLevels:
   - {fileID: 7737223663502899262, guid: 7385a62608be71d4f9a608a9004f9ca7, type: 3}
   - {fileID: 7737223663502899262, guid: 243e8dfcce4cd20428d16f0b44b9125f, type: 3}
+  cinemachineCamera: {fileID: 63463257}
 --- !u!4 &1959964850
 Transform:
   m_ObjectHideFlags: 0

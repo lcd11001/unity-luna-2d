@@ -374,6 +374,7 @@ Transform:
   - {fileID: 2435533170493331671}
   - {fileID: 1127248184499642154}
   - {fileID: 9193095414438313947}
+  - {fileID: 5349683306825237066}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7737223663502899262
@@ -390,6 +391,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <LevelNumber>k__BackingField: 1
   <PlayerSpawnPoint>k__BackingField: {fileID: 9193095414438313947}
+  <TargetCamera>k__BackingField: {fileID: 5349683306825237066}
+  <CameraZoomSize>k__BackingField: 13
+--- !u!1 &7519892807500846342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5349683306825237066}
+  m_Layer: 0
+  m_Name: TargetCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5349683306825237066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519892807500846342}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.11, y: -0.89, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5149135676661792724}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &190008834600018702
 PrefabInstance:
   m_ObjectHideFlags: 0

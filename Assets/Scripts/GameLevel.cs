@@ -7,4 +7,10 @@ public class GameLevel : MonoBehaviour
 
     [field: SerializeField]
     public Transform PlayerSpawnPoint { get; private set; }
+
+    [field: SerializeField]
+    public Transform TargetCamera { get; private set; }
+
+    [field: SerializeField]
+    public float CameraZoomSize { get; private set; }
 }
