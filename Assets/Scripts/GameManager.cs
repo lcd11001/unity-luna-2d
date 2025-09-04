@@ -71,6 +71,15 @@ public class GameManager : MonoBehaviour
     public void HandleLanderStateChanged(Lander.State state)
     {
         isGameActive = state == Lander.State.Flying;
+
+        if (state != Lander.State.Waiting)
+        {
+            if (cinemachineCamera != null && Lander.Instance != null)
+            {
+                cinemachineCamera.Target.TrackingTarget = Lander.Instance.transform;
+                cinemachineCamera.Lens.OrthographicSize = 10f;
+            }
+        }
     }
 
     private void AddScore(int amount)
