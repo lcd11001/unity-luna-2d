@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,7 +36,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("GameManager started");
         LoadCurrentLevel();
+        ResetParams();
     }
 
     private void Update()
@@ -73,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadCurrentLevel()
     {
+        bool levelFound = false;
         // Load the current level data
         if (gameLevels != null && gameLevels.Count > 0)
         {
@@ -80,6 +85,8 @@ public class GameManager : MonoBehaviour
             {
                 if (level.LevelNumber == CurrentLevel)
                 {
+                    levelFound = true;
+                    Debug.Log("Loading level: " + CurrentLevel);
                     // Instantiate the level prefab
                     var newLevel = Instantiate(level, Vector3.zero, Quaternion.identity);
 
@@ -92,5 +99,40 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        if (!levelFound)
+        {
+            Debug.LogWarning("Level not found: " + CurrentLevel + ". Restarting from level 1.");
+            CurrentLevel = 1;
+            LoadCurrentLevel();
+        }
+    }
+
+    private void ResetParams()
+    {
+        Score = 0;
+        Time = 0f;
+        isGameActive = false;
+    }
+
+    public void GoToNextLevel()
+    {
+        Debug.Log("Going to next level");
+        CurrentLevel++;
+        StartCoroutine(LoadGame());
+    }
+
+    public void RetryLevel()
+    {
+        Debug.Log("Retrying level");
+        StartCoroutine(LoadGame());
+    }
+
+    private IEnumerator LoadGame()
+    {
+        var asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        yield return new WaitUntil(() => asyncLoad.isDone);
+        ResetParams();
+        LoadCurrentLevel();
     }
 }

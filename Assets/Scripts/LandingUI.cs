@@ -14,7 +14,11 @@ public class LandingUI : MonoBehaviour
     [SerializeField]
     private TMP_Text statusText;
     [SerializeField]
+    private TMP_Text buttonText;
+    [SerializeField]
     private Button restartButton;
+
+    private Action onRestartAction;
 
     void Awake()
     {
@@ -24,7 +28,7 @@ public class LandingUI : MonoBehaviour
 
     private void OnRestartButtonClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        onRestartAction?.Invoke();
     }
 
     public void OnLandingEvent(OnLandingEvent landingEvent)
@@ -34,11 +38,14 @@ public class LandingUI : MonoBehaviour
         if (landingEvent.type == LandingType.Success)
         {
             titleText.text = "SUCCESSFUL LANDING!";
-
+            buttonText.text = "CONTINUE";
+            onRestartAction = GameManager.Instance.GoToNextLevel;
         }
         else
         {
             titleText.text = "<color=#ff0000>CRASH!</color>";
+            buttonText.text = "RETRY";
+            onRestartAction = GameManager.Instance.RetryLevel;
         }
 
         statusText.text = $"{ConvertSpeed(landingEvent.landingSpeed)}\n" +

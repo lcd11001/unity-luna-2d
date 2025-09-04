@@ -2296,6 +2296,7 @@ MonoBehaviour:
   panel: {fileID: 917817542}
   titleText: {fileID: 1159191828}
   statusText: {fileID: 1784756804}
+  buttonText: {fileID: 1518094009}
   restartButton: {fileID: 2137522864}
 --- !u!114 &1457496968
 MonoBehaviour:
@@ -2337,7 +2338,7 @@ GameObject:
   - component: {fileID: 1518094010}
   - component: {fileID: 1518094009}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ButtonRestartText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3070,6 +3071,7 @@ MonoBehaviour:
   <CurrentLevel>k__BackingField: 1
   gameLevels:
   - {fileID: 7737223663502899262, guid: 7385a62608be71d4f9a608a9004f9ca7, type: 3}
+  - {fileID: 7737223663502899262, guid: 243e8dfcce4cd20428d16f0b44b9125f, type: 3}
 --- !u!4 &1959964850
 Transform:
   m_ObjectHideFlags: 0
