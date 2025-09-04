@@ -36,7 +36,8 @@ public class StatsUI : MonoBehaviour
 
     private void UpdateValue()
     {
-        valueText.text = GameManager.Instance.Score + "\n"
+        valueText.text = GameManager.Instance.CurrentLevel + "\n"
+        + GameManager.Instance.Score + "\n"
         + ConvertTime(GameManager.Instance.Time) + "\n"
         + ConvertSpeed(Lander.Instance.GetSpeedX()) + "\n"
         + ConvertSpeed(Lander.Instance.GetSpeedY());
