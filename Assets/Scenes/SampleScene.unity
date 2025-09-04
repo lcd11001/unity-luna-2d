@@ -545,8 +545,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1634068773}
   - {fileID: 1457496966}
+  - {fileID: 1634068773}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1025,7 +1025,7 @@ MonoBehaviour:
   BlendUpdateMethod: 1
   LensModeOverride:
     Enabled: 0
-    DefaultMode: 2
+    DefaultMode: 0
   DefaultBlend:
     Style: 1
     Time: 2
@@ -2091,7 +2091,7 @@ MonoBehaviour:
 
     Multiplier
 
-    Score'
+    Landing Score'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30fd7f1dc1df39b4ba461abbf37b996a, type: 2}
   m_sharedMaterial: {fileID: -6917498455059095038, guid: 30fd7f1dc1df39b4ba461abbf37b996a, type: 2}
@@ -2245,6 +2245,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1338300847}
   m_CullTransparentMesh: 1
+--- !u!1 &1408416786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1408416788}
+  - component: {fileID: 1408416787}
+  m_Layer: 0
+  m_Name: CinemachineCameraZoom2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1408416787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408416786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ad017545f89644cbc2dc0851183704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomSpeed: 1
+  minZoom: 5
+  maxZoom: 50
+  targetZoom: 10
+  virtualCamera: {fileID: 63463257}
+--- !u!4 &1408416788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408416786}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1457496965
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,6 +2893,7 @@ GameObject:
   - component: {fileID: 1842005665}
   - component: {fileID: 1842005667}
   - component: {fileID: 1842005666}
+  - component: {fileID: 1842005668}
   m_Layer: 5
   m_Name: FuelBackground
   m_TagString: Untagged
@@ -2908,6 +2958,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1842005664}
   m_CullTransparentMesh: 1
+--- !u!114 &1842005668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842005664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!198 &1888295988 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7920034374121356911, guid: 6417a7f60d478884997c6c9ac491d28a, type: 3}
@@ -3104,7 +3169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f040f6daaea12024487905a7a11d73f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _event: {fileID: 0}
+  _event: {fileID: 11400000, guid: 0d3cd6581cd5d25488596fe013c0c940, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -3432,3 +3497,4 @@ SceneRoots:
   - {fileID: 1959964850}
   - {fileID: 411897147}
   - {fileID: 695184309}
+  - {fileID: 1408416788}

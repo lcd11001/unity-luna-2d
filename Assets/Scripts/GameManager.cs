@@ -58,9 +58,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void HandleLandedSuccessful(int score)
+    public void HandleLandedSuccessful(OnLandingEvent landingEvent)
     {
-        AddScore(score);
+        AddScore(landingEvent.score);
     }
 
     public void HandleCoinPickedUp(int amount)
@@ -77,7 +77,8 @@ public class GameManager : MonoBehaviour
             if (cinemachineCamera != null && Lander.Instance != null)
             {
                 cinemachineCamera.Target.TrackingTarget = Lander.Instance.transform;
-                cinemachineCamera.Lens.OrthographicSize = 10f;
+                CinemachineCameraZoom2D.Instance.SetTargetZoom(10f);
+                CinemachineCameraZoom2D.Instance.SetDeadZoneSize(0.2f, 0.2f);
             }
         }
     }
@@ -112,7 +113,8 @@ public class GameManager : MonoBehaviour
                     if (cinemachineCamera != null)
                     {
                         cinemachineCamera.Target.TrackingTarget = newLevel.TargetCamera;
-                        cinemachineCamera.Lens.OrthographicSize = newLevel.CameraZoomSize;
+                        CinemachineCameraZoom2D.Instance.SetTargetZoom(newLevel.CameraZoomSize);
+                        CinemachineCameraZoom2D.Instance.SetDeadZoneSize(0, 0);
                     }
                     break;
                 }
@@ -135,6 +137,7 @@ public class GameManager : MonoBehaviour
 
         // the reference to the Cinemachine camera is missing after reload the scene
         cinemachineCamera = FindFirstObjectByType<CinemachineCamera>();
+        CinemachineCameraZoom2D.Instance.SetVitualCamera(cinemachineCamera);
     }
 
     public void GoToNextLevel()
