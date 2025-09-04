@@ -14,48 +14,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentVersion: 1.00
   subtype: lunarLanderFree
-  lastShownTimestamp: 1756000726
+  lastShownTimestamp: 1756949148
   lastUpdateResponse:
     version: 1.00
     versionUrl: https://unitycodemonkey.com
-  checkedLastUpdateTimestamp: 1756000726
+  checkedLastUpdateTimestamp: 1756949148
   lastQOTDResponse:
-    questionId: 214
-    questionText: 'What is the position of the transform after running this code?
+    questionId: 217
+    questionText: 'When would this code cause an error?
 
-      <p>Vector3
-      targetPosition = new Vector3(10, 0, 0);</p>
+      <p>Building closest
+      = null;</p>
 
-      <p>transform.position =
-      targetPosition;</p>
+      <p>for (int i = 0; i &lt; instanceList.Count; i++) {</p>
 
-      <p>targetPosition.x = 20;</p>'
-    answerA: (10, 0, 0)
-    answerB: (20, 0, 0)
-    answerC: Unknown
+      <p>&nbsp;
+      &nbsp; if (Vector3.Distance(position, instanceList[i].GetPosition()) &lt; Vector3.Distance(position,
+      closest.GetPosition())) {</p>
+
+      <p>&nbsp; &nbsp; &nbsp; &nbsp; closest
+      = instanceList[i];</p>
+
+      <p>&nbsp; &nbsp; }</p>
+
+      <p>}</p>
+
+      <p>return
+      closest;</p>'
+    answerA: When instanceList is empty
+    answerB: When instanceList has at least one element
+    answerC: When instanceList has exactly two elements
     answerD: 
     answerE: 
-  lastQotdTimestamp: 1756000726
+  lastQotdTimestamp: 1756949148
   lastDynamicHeaderResponse:
-    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/summer2025CodeMonkeyBundle_EndsTomorrow.png
-    topText: All my Courses (and Games) in one Bundle! DEEP DISCOUNT ENDS TOMORROW!
-    topLink: summer2025bundle
-    bottomText: Get my Code Monkey Toolkit and make games BETTER and FASTER! 50%
-      OFF right now!
-    bottomLink: toolkit
-  lastDynamicHeaderTimestamp: 1756000726
+    topImageUrl: https://codemonkeyexternal.blob.core.windows.net/external/Misc/humbleBundleAug25RealisticEnv.png
+    topText: AWESOME Realistic Environments 99% OFF!
+    topLink: humblebundle
+    bottomText: My 10+ Years of C# Knowledge in 1 Course!
+    bottomLink: csharpcourse
+  lastDynamicHeaderTimestamp: 1756949148
   websiteLatestMessage:
     text: <a href="https://cmonkey.co/freecourses">Check out all my FREE courses!
       Click here!</a>
-  websiteLatestMessageTimestamp: 1756000726
+  websiteLatestMessageTimestamp: 1756949148
   websiteLatestVideos:
     videos:
-    - youTubeId: YCvh88Hg5m8
-      title: TOP 8 QUICK Tips on Game Programming!
-    - youTubeId: Lgmv7PYKka8
-      title: Does this AI FINALLY replace Game Devs? Should YOU worry?
-    - youTubeId: x4BTbeKinSI
-      title: TOP 10 FREE NEW Assets AUGUST 2025!
-    - youTubeId: HZ48JOAf-Ko
-      title: Did I STOP making TUTORIALS?
-  websiteLatestVideosTimestamp: 1756000726
+    - youTubeId: 8Ym28WJUYnQ
+      title: The BIGGEST Problem in Game Dev!
+    - youTubeId: C66iDut3jTM
+      title: BEST NEW Visual Assets to INSPIRE YOU!
+    - youTubeId: JZHByNNQb3I
+      title: 8 QUICK Success and Marketing Tips you NEED to know!
+    - youTubeId: FrKLJ1nCsxY
+      title: Indie Dev makes $4 MILLION... then goes broke!
+  websiteLatestVideosTimestamp: 1756949148
