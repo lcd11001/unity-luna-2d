@@ -26,6 +26,14 @@ public class LandingUI : MonoBehaviour
         restartButton.onClick.AddListener(OnRestartButtonClicked);
     }
 
+    void Update()
+    {
+        if (GameInput.Instance.IsUpActionPressed() && panel.activeSelf)
+        {
+            OnRestartButtonClicked();
+        }
+    }
+
     private void OnRestartButtonClicked()
     {
         onRestartAction?.Invoke();
