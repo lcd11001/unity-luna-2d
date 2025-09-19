@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+// using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Lander : MonoBehaviour
@@ -144,10 +144,13 @@ public class Lander : MonoBehaviour
 
     private void Update()
     {
-        moveUp = Keyboard.current.upArrowKey.isPressed || Keyboard.current.wKey.isPressed;
-        moveLeft = Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed;
-        moveRight = Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed;
+        // moveUp = Keyboard.current.upArrowKey.isPressed || Keyboard.current.wKey.isPressed;
+        // moveLeft = Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed;
+        // moveRight = Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed;
 
+        moveUp = GameInput.Instance.IsUpActionPressed();
+        moveLeft = GameInput.Instance.IsLeftActionPressed();
+        moveRight = GameInput.Instance.IsRightActionPressed();
     }
 
     private void OnCollisionEnter2D(Collision2D collision2D)
