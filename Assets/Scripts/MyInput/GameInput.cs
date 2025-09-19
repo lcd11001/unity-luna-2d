@@ -24,7 +24,10 @@ public class GameInput : MonoBehaviour
 
     private void OnDestroy()
     {
-        inputActions.Disable();
+        if (inputActions != null)
+        {
+            inputActions.Disable();
+        }
     }
 
     public bool IsUpActionPressed()
