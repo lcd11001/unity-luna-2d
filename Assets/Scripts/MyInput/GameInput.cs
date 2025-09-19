@@ -22,6 +22,11 @@ public class GameInput : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    private void OnDestroy()
+    {
+        inputActions.Disable();
+    }
+
     public bool IsUpActionPressed()
     {
         return inputActions.Player.LanderUp.IsPressed();
