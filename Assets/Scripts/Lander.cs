@@ -42,10 +42,12 @@ public class Lander : MonoBehaviour
     private bool moveUp = false;
     private bool moveLeft = false;
     private bool moveRight = false;
+    private Vector2 movementInput = Vector2.zero;
 
     public static Lander Instance { get; private set; }
 
     private const float GRAVITY_NORMAL = 0.7f;
+    private const float MOVEMENT_THRESHOLD = 0.1f;
 
     public enum State
     {
@@ -88,7 +90,7 @@ public class Lander : MonoBehaviour
         switch (GetState())
         {
             case State.Waiting:
-                if (moveUp || moveLeft || moveRight)
+                if (moveUp || moveLeft || moveRight || movementInput.magnitude > MOVEMENT_THRESHOLD)
                 {
                     rb.gravityScale = GRAVITY_NORMAL;
 
@@ -102,26 +104,26 @@ public class Lander : MonoBehaviour
                     return;
                 }
 
-                if (moveUp || moveLeft || moveRight)
+                if (moveUp || moveLeft || moveRight || movementInput.magnitude > MOVEMENT_THRESHOLD)
                 {
                     ConsumeFuel();
                 }
 
-                if (moveUp)
+                if (moveUp || movementInput.y > MOVEMENT_THRESHOLD)
                 {
                     // Debug.Log("Moving Up");
                     rb.AddForce(transform.up * speed * Time.deltaTime, ForceMode2D.Force);
                     OnUpForce?.Invoke(this, EventArgs.Empty);
                 }
 
-                if (moveLeft)
+                if (moveLeft || movementInput.x < -MOVEMENT_THRESHOLD)
                 {
                     // Debug.Log("Moving Left");
                     rb.AddTorque(rotationSpeed * Time.deltaTime);
                     OnLeftForce?.Invoke(this, EventArgs.Empty);
                 }
 
-                if (moveRight)
+                if (moveRight || movementInput.x > MOVEMENT_THRESHOLD)
                 {
                     // Debug.Log("Moving Right");
                     rb.AddTorque(-rotationSpeed * Time.deltaTime);
@@ -151,6 +153,8 @@ public class Lander : MonoBehaviour
         moveUp = GameInput.Instance.IsUpActionPressed();
         moveLeft = GameInput.Instance.IsLeftActionPressed();
         moveRight = GameInput.Instance.IsRightActionPressed();
+
+        movementInput = GameInput.Instance.GetMovementVector();
     }
 
     private void OnCollisionEnter2D(Collision2D collision2D)
