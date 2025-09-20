@@ -49,4 +49,9 @@ public class GameInput : MonoBehaviour
     {
         return inputActions.Player.Movement.ReadValue<Vector2>();
     }
+
+    public bool IsConfirmActionPressed()
+    {
+        return inputActions.Player.ConfirmUI.IsPressed();
+    }
 }
