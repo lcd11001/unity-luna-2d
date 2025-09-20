@@ -28,7 +28,7 @@ public class LandingUI : MonoBehaviour
 
     void Update()
     {
-        if (GameInput.Instance.IsConfirmActionPressed() && panel.activeSelf)
+        if (GameInput.Instance.IsMenuConfirmPressed() && panel.activeSelf)
         {
             OnRestartButtonClicked();
         }

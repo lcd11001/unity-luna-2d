@@ -12,7 +12,7 @@ public class PauseUI : MonoBehaviour
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        Hide();
         GameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
         GameManager.Instance.OnGameResumed += GameManager_OnGameResumed;
     }
@@ -28,16 +28,26 @@ public class PauseUI : MonoBehaviour
 
     private void GameManager_OnGamePaused(object sender, System.EventArgs e)
     {
-        gameObject.SetActive(true);
+        Show();
     }
 
     private void GameManager_OnGameResumed(object sender, System.EventArgs e)
     {
-        gameObject.SetActive(false);
+        Hide();
     }
 
     private void OnResumeClicked()
     {
         GameManager.Instance.ResumeGame();
+    }
+
+    private void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

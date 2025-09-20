@@ -46,6 +46,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager started");
         LoadCurrentLevel();
         ResetParams();
+
+        GameInput.Instance.OnMenuPaused += OnMenuPausedHandler;
+    }
+
+    private void OnMenuPausedHandler(object sender, EventArgs e)
+    {
+        TogglePauseGame();
     }
 
     private void Update()
