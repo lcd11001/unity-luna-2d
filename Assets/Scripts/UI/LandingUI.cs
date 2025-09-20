@@ -26,9 +26,25 @@ public class LandingUI : MonoBehaviour
         restartButton.onClick.AddListener(OnRestartButtonClicked);
     }
 
-    void Update()
+    void Start()
     {
-        if (GameInput.Instance.IsMenuConfirmPressed() && panel.activeSelf)
+        if (GameInput.Instance != null)
+        {
+            GameInput.Instance.OnMenuConfirmed += GameInput_OnMenuConfirmed;
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (GameInput.Instance != null)
+        {
+            GameInput.Instance.OnMenuConfirmed -= GameInput_OnMenuConfirmed;
+        }
+    }
+
+    private void GameInput_OnMenuConfirmed(object sender, EventArgs e)
+    {
+        if (panel.activeSelf)
         {
             OnRestartButtonClicked();
         }

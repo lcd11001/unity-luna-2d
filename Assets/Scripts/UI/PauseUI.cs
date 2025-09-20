@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseUI : MonoBehaviour
+public class PauseUI : MenuUIBase
 {
     [SerializeField] private Button buttonResume;
 
@@ -10,15 +10,22 @@ public class PauseUI : MonoBehaviour
         buttonResume.onClick.AddListener(OnResumeClicked);
     }
 
-    private void Start()
+    protected override void Start()
     {
+        InitializeButtons(buttonResume);
+        base.Start();
+
         Hide();
-        GameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
-        GameManager.Instance.OnGameResumed += GameManager_OnGameResumed;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
+            GameManager.Instance.OnGameResumed += GameManager_OnGameResumed;
+        }
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (GameManager.Instance != null)
         {
             GameManager.Instance.OnGamePaused -= GameManager_OnGamePaused;
@@ -38,7 +45,10 @@ public class PauseUI : MonoBehaviour
 
     private void OnResumeClicked()
     {
-        GameManager.Instance.ResumeGame();
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ResumeGame();
+        }
     }
 
     private void Show()

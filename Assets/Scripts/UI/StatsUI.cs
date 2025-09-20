@@ -36,6 +36,8 @@ public class StatsUI : MonoBehaviour
 
     private void UpdateValue()
     {
+        if (!GameManager.Instance || !Lander.Instance) return;
+
         valueText.text = GameManager.Instance.CurrentLevel + "\n"
         + GameManager.Instance.Score + "\n"
         + ConvertTime(GameManager.Instance.FlyingTime) + "\n"
@@ -45,6 +47,8 @@ public class StatsUI : MonoBehaviour
 
     private void UpdateArrow()
     {
+        if (!Lander.Instance) return;
+
         float epsilon = 0.1f;
 
         arrowUp.SetActive(Lander.Instance.GetSpeedY() > epsilon);

@@ -161,8 +161,8 @@ public class GameManager : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        Debug.Log("Going to next level");
         CurrentLevel++;
+        Debug.Log("Going to next level: " + CurrentLevel);
         StartCoroutine(LoadGame());
     }
 

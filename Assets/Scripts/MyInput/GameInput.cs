@@ -67,11 +67,6 @@ public class GameInput : MonoBehaviour
         return inputActions.Player.Movement.ReadValue<Vector2>();
     }
 
-    public bool IsMenuConfirmPressed()
-    {
-        return inputActions.Menu.Confirm.IsPressed();
-    }
-
     private void OnMenuPause_performed(InputAction.CallbackContext context)
     {
         OnMenuPaused?.Invoke(this, EventArgs.Empty);

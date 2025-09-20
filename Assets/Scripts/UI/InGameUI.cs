@@ -12,6 +12,9 @@ public class InGameUI : MonoBehaviour
 
     private void OnPauseClicked()
     {
-        GameManager.Instance.PauseGame();
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.PauseGame();
+        }
     }
 }
