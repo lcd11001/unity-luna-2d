@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
@@ -9,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int Score { get; private set; }
 
     [field: SerializeField]
-    public float Time { get; private set; }
+    public float FlyingTime { get; private set; }
 
     [field: SerializeField]
     public int CurrentLevel { get; private set; }
@@ -23,6 +24,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     private bool isGameActive = false;
+
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameResumed;
 
     private void Awake()
     {
@@ -53,7 +57,7 @@ public class GameManager : MonoBehaviour
         // }
         if (isGameActive)
         {
-            Time += UnityEngine.Time.deltaTime;
+            FlyingTime += UnityEngine.Time.deltaTime;
         }
     }
 
@@ -131,7 +135,7 @@ public class GameManager : MonoBehaviour
     private void ResetParams()
     {
         Score = 0;
-        Time = 0f;
+        FlyingTime = 0f;
         isGameActive = false;
 
         // the reference to the Cinemachine camera is missing after reload the scene
@@ -158,5 +162,31 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => asyncLoad.isDone);
         ResetParams();
         LoadCurrentLevel();
+    }
+
+    public void TogglePauseGame()
+    {
+        if (isGameActive)
+        {
+            PauseGame();
+        }
+        else
+        {
+            ResumeGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        isGameActive = false;
+        OnGamePaused?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        isGameActive = true;
+        OnGameResumed?.Invoke(this, EventArgs.Empty);
     }
 }
