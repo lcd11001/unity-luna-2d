@@ -11,9 +11,12 @@ public class SceneLoader : MonoBehaviour
 #if UNITY_EDITOR
     [SerializeField] private SceneAsset gameScene;
     [SerializeField] private SceneAsset mainMenuScene;
+    [SerializeField] private SceneAsset gameOverScene;
 #endif
+
     [SerializeField, HideInInspector] private string gameSceneName;
     [SerializeField, HideInInspector] private string mainMenuSceneName;
+    [SerializeField, HideInInspector] private string gameOverSceneName;
 
     private void OnValidate()
     {
@@ -25,6 +28,10 @@ public class SceneLoader : MonoBehaviour
         if (mainMenuScene != null)
         {
             mainMenuSceneName = mainMenuScene.name;
+        }
+        if (gameOverScene != null)
+        {
+            gameOverSceneName = gameOverScene.name;
         }
 #endif
     }
@@ -54,6 +61,15 @@ public class SceneLoader : MonoBehaviour
         if (!string.IsNullOrEmpty(mainMenuSceneName))
         {
             return SceneManager.LoadSceneAsync(mainMenuSceneName);
+        }
+        return null;
+    }
+
+    public AsyncOperation LoadGameOverScene()
+    {
+        if (!string.IsNullOrEmpty(gameOverSceneName))
+        {
+            return SceneManager.LoadSceneAsync(gameOverSceneName);
         }
         return null;
     }

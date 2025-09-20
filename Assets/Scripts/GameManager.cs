@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public int Score { get; private set; }
 
     [field: SerializeField]
+    public int TotalScore { get; private set; }
+
+    [field: SerializeField]
     public float FlyingTime { get; private set; }
 
     [field: SerializeField]
@@ -153,9 +156,10 @@ public class GameManager : MonoBehaviour
 
         if (!levelFound)
         {
-            Debug.LogWarning("Level not found: " + CurrentLevel + ". Restarting from level 1.");
-            CurrentLevel = 1;
-            LoadCurrentLevel();
+            // Debug.LogWarning("Level not found: " + CurrentLevel + ". Restarting from level 1.");
+            // CurrentLevel = 1;
+            // LoadCurrentLevel();
+            GoToGameOver();
         }
     }
 
@@ -173,8 +177,19 @@ public class GameManager : MonoBehaviour
     public void GoToNextLevel()
     {
         CurrentLevel++;
+        TotalScore += Score;
         Debug.Log("Going to next level: " + CurrentLevel);
         StartCoroutine(LoadGame());
+    }
+
+    private void GoToGameOver()
+    {
+        TotalScore += Score;
+        Debug.Log("Game Over! Final Score: " + TotalScore);
+        if (SceneLoader.Instance != null)
+        {
+            SceneLoader.Instance.LoadGameOverScene();
+        }
     }
 
     public void RetryLevel()
