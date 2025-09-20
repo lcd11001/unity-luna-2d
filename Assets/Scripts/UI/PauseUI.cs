@@ -4,15 +4,17 @@ using UnityEngine.UI;
 public class PauseUI : MenuUIBase
 {
     [SerializeField] private Button buttonResume;
+    [SerializeField] private Button buttonMainMenu;
 
     private void Awake()
     {
         buttonResume.onClick.AddListener(OnResumeClicked);
+        buttonMainMenu.onClick.AddListener(OnMainMenuClicked);
     }
 
     protected override void Start()
     {
-        InitializeButtons(buttonResume);
+        InitializeButtons(buttonResume, buttonMainMenu);
         base.Start();
 
         Hide();
@@ -49,6 +51,15 @@ public class PauseUI : MenuUIBase
         if (GameManager.Instance != null)
         {
             GameManager.Instance.ResumeGame();
+        }
+    }
+
+    private void OnMainMenuClicked()
+    {
+        Debug.Log("MainMenu button clicked");
+        if (SceneLoader.Instance != null)
+        {
+            SceneLoader.Instance.LoadMainMenuScene();
         }
     }
 
