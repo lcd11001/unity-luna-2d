@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -155,7 +154,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadGame()
     {
-        var asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        var asyncLoad = SceneLoader.Instance.LoadGameScene();
         yield return new WaitUntil(() => asyncLoad.isDone);
         ResetParams();
         LoadCurrentLevel();
