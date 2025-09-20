@@ -55,6 +55,15 @@ public class GameManager : MonoBehaviour
         TogglePauseGame();
     }
 
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        Debug.LogWarning("Application focus changed: " + hasFocus + ", isGameActive: " + isGameActive);
+        if (!hasFocus && isGameActive)
+        {
+            PauseGame();
+        }
+    }
+
     private void Update()
     {
         // Should use event instead, to avoid direct reference
