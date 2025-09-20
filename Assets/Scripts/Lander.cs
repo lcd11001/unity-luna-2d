@@ -109,7 +109,7 @@ public class Lander : MonoBehaviour
                     ConsumeFuel();
                 }
 
-                if (moveUp)
+                if (moveUp || movementInput.y > MOVEMENT_THRESHOLD)
                 {
                     // Debug.Log("Moving Up");
                     rb.AddForce(transform.up * speed * Time.deltaTime, ForceMode2D.Force);
