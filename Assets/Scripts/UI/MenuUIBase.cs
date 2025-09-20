@@ -54,19 +54,20 @@ public abstract class MenuUIBase : MonoBehaviour
     private void GameInput_OnMenuUp(object sender, System.EventArgs e)
     {
         selectedIndex = (selectedIndex - 1 + totalButtons) % totalButtons; // Wrap around for 2 buttons
-        // Debug.Log("Menu Up pressed, selectedIndex: " + selectedIndex);
+        // Debug.Log(gameObject.name + " Menu Up pressed, selectedIndex: " + selectedIndex);
         UpdateButtonSelection();
     }
 
     private void GameInput_OnMenuDown(object sender, System.EventArgs e)
     {
         selectedIndex = (selectedIndex + 1) % totalButtons; // Wrap around for 2 buttons
-        // Debug.Log("Menu Down pressed, selectedIndex: " + selectedIndex);
+        // Debug.Log(gameObject.name + " Menu Down pressed, selectedIndex: " + selectedIndex);
         UpdateButtonSelection();
     }
 
     private void GameInput_OnMenuConfirmed(object sender, System.EventArgs e)
     {
+        Debug.LogWarning(gameObject.name + " Menu Confirmed pressed, invoking button at index: " + selectedIndex);
         if (buttons != null && buttons.Count > 0)
         {
             buttons[selectedIndex].onClick.Invoke();

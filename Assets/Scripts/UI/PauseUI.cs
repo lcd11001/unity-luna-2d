@@ -45,6 +45,7 @@ public class PauseUI : MenuUIBase
 
     private void OnResumeClicked()
     {
+        Debug.Log("Resume button clicked");
         if (GameManager.Instance != null)
         {
             GameManager.Instance.ResumeGame();

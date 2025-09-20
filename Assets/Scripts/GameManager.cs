@@ -47,7 +47,18 @@ public class GameManager : MonoBehaviour
         LoadCurrentLevel();
         ResetParams();
 
-        GameInput.Instance.OnMenuPaused += OnMenuPausedHandler;
+        if (GameInput.Instance != null)
+        {
+            GameInput.Instance.OnMenuPaused += OnMenuPausedHandler;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (GameInput.Instance != null)
+        {
+            GameInput.Instance.OnMenuPaused -= OnMenuPausedHandler;
+        }
     }
 
     private void OnMenuPausedHandler(object sender, EventArgs e)
