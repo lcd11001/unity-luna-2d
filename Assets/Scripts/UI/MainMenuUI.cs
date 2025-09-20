@@ -28,6 +28,8 @@ public class MainMenuUI : MenuUIBase
             Destroy(GameManager.Instance.gameObject);
         }
 
+        Time.timeScale = 1f;
+
         if (SceneLoader.Instance != null)
         {
             SceneLoader.Instance.LoadGameScene();
