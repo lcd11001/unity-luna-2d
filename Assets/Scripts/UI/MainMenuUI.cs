@@ -9,6 +9,8 @@ public class MainMenuUI : MenuUIBase
 
     private void Awake()
     {
+        Time.timeScale = 1f;
+
         buttonPlay.onClick.AddListener(OnPlayClicked);
         buttonQuit.onClick.AddListener(OnQuitClicked);
     }
@@ -27,8 +29,6 @@ public class MainMenuUI : MenuUIBase
             // GameManager.Instance.ResetLevel();
             Destroy(GameManager.Instance.gameObject);
         }
-
-        Time.timeScale = 1f;
 
         if (SceneLoader.Instance != null)
         {
