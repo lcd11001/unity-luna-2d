@@ -22,6 +22,12 @@ public class MainMenuUI : MenuUIBase
     private void OnPlayClicked()
     {
         Debug.Log("Play button clicked");
+        if (GameManager.Instance != null)
+        {
+            // GameManager.Instance.ResetLevel();
+            Destroy(GameManager.Instance.gameObject);
+        }
+
         if (SceneLoader.Instance != null)
         {
             SceneLoader.Instance.LoadGameScene();

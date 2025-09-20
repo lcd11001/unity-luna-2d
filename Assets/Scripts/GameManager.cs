@@ -163,6 +163,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ResetLevel()
+    {
+        Debug.LogWarning("Resetting level to 1");
+        CurrentLevel = 1;
+        TotalScore = 0;
+    }
+
     private void ResetParams()
     {
         Score = 0;
