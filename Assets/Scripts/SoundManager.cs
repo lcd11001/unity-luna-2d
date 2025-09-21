@@ -27,14 +27,14 @@ public class SoundManager : MonoBehaviour
 
     public void ChangeVolume(int newValue)
     {
-        Debug.Log($"SoundManager ChangeVolume: old Volume={Volume} new Volume={newValue}");
+        // Debug.Log($"SoundManager ChangeVolume: old Volume={Volume} new Volume={newValue}");
         Volume = Mathf.Clamp(newValue, 0, MaxVolume);
     }
 
     public float GetNormalizeVolume()
     {
         float normalizedVolume = Mathf.Clamp01((float)Volume / MaxVolume);
-        Debug.Log($"SoundManager GetVolume: Volume={Volume}, MaxVolume={MaxVolume}, Normalized={normalizedVolume}");
+        // Debug.Log($"SoundManager GetVolume: Volume={Volume}, MaxVolume={MaxVolume}, Normalized={normalizedVolume}");
         return normalizedVolume;
     }
 
