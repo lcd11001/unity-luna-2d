@@ -39,6 +39,7 @@ public class LanderAudio : MonoBehaviour
     {
         if (audioSource != null && !audioSource.isPlaying)
         {
+            audioSource.volume = SoundManager.Instance != null ? SoundManager.Instance.GetNormalizeVolume() : 1.0f;
             audioSource.Play();
         }
     }
